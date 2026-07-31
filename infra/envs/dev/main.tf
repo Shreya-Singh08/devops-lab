@@ -11,3 +11,10 @@ module "ecr" {
   source  = "../../modules/ecr"
   project = "devops-lab"
 }
+
+module "alb" {
+  source             = "../../modules/alb"
+  project            = "devops-lab"
+  vpc_id             = module.network.vpc_id
+  public_subnet_ids  = module.network.public_subnet_ids
+}
