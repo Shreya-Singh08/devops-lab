@@ -35,3 +35,13 @@ module "oidc" {
   project     = "devops-lab"
   github_repo = "Shreya-Singh08/devops-lab"
 }
+
+module "monitoring" {
+  source                   = "../../modules/monitoring"
+  project                  = "devops-lab"
+  alert_email               = "1997.21shreya@gmail.com"
+  ecs_cluster_name          = module.ecs.cluster_name
+  ecs_service_name          = module.ecs.service_name
+  alb_arn_suffix             = module.alb.alb_arn_suffix
+  target_group_arn_suffix    = module.alb.target_group_arn_suffix
+}
