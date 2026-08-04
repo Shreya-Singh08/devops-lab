@@ -35,42 +35,28 @@ resource "aws_iam_role_policy" "deploy" {
     Version = "2012-10-17"
     Statement = [
       {
-        Effect = "Allow"
-        Action = [
-          "ecr:GetAuthorizationToken",
-          "ecr:BatchCheckLayerAvailability",
-          "ecr:GetDownloadUrlForLayer",
-          "ecr:BatchGetImage",
-          "ecr:PutImage",
-          "ecr:InitiateLayerUpload",
-          "ecr:UploadLayerPart",
-          "ecr:CompleteLayerUpload"
-        ]
+        Effect   = "Allow"
+        Action   = ["ecr:*"]
+        Resource = "*"
+      },
+      {
+        Effect   = "Allow"
+        Action   = ["ecs:*"]
+        Resource = "*"
+      },
+      {
+        Effect   = "Allow"
+        Action   = ["ec2:*"]
+        Resource = "*"
+      },
+      {
+        Effect   = "Allow"
+        Action   = ["elasticloadbalancing:*"]
         Resource = "*"
       },
       {
         Effect = "Allow"
         Action = [
-          "ecs:UpdateService",
-          "ecs:DescribeServices",
-          "ecs:DescribeTaskDefinition",
-          "ecs:RegisterTaskDefinition"
-        ]
-        Resource = "*"
-      },
-      {
-        Effect = "Allow"
-        Action = [
-          "ec2:Describe*",
-          "ec2:CreateSecurityGroup",
-          "ec2:DeleteSecurityGroup",
-          "ec2:AuthorizeSecurityGroupIngress",
-          "ec2:AuthorizeSecurityGroupEgress",
-          "ec2:RevokeSecurityGroupIngress",
-          "ec2:RevokeSecurityGroupEgress",
-          "ec2:CreateTags",
-          "elasticloadbalancing:*",
-          "iam:PassRole",
           "iam:GetRole",
           "iam:CreateRole",
           "iam:DeleteRole",
@@ -82,13 +68,29 @@ resource "aws_iam_role_policy" "deploy" {
           "iam:TagRole",
           "iam:ListRolePolicies",
           "iam:ListAttachedRolePolicies",
-          "logs:*",
-          "s3:GetObject",
-          "s3:PutObject",
-          "dynamodb:GetItem",
-          "dynamodb:PutItem",
-          "dynamodb:DeleteItem"
+          "iam:PassRole",
+          "iam:GetOpenIDConnectProvider",
+          "iam:CreateOpenIDConnectProvider",
+          "iam:DeleteOpenIDConnectProvider",
+          "iam:UpdateOpenIDConnectProviderThumbprint",
+          "iam:TagOpenIDConnectProvider",
+          "iam:ListOpenIDConnectProviderTags"
         ]
+        Resource = "*"
+      },
+      {
+        Effect   = "Allow"
+        Action   = ["logs:*"]
+        Resource = "*"
+      },
+      {
+        Effect   = "Allow"
+        Action   = ["s3:GetObject", "s3:PutObject"]
+        Resource = "*"
+      },
+      {
+        Effect   = "Allow"
+        Action   = ["dynamodb:GetItem", "dynamodb:PutItem", "dynamodb:DeleteItem"]
         Resource = "*"
       }
     ]
