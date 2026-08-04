@@ -13,21 +13,21 @@ module "ecr" {
 }
 
 module "alb" {
-  source             = "../../modules/alb"
-  project            = "devops-lab"
-  vpc_id             = module.network.vpc_id
-  public_subnet_ids  = module.network.public_subnet_ids
+  source            = "../../modules/alb"
+  project           = "devops-lab"
+  vpc_id            = module.network.vpc_id
+  public_subnet_ids = module.network.public_subnet_ids
 }
 
 module "ecs" {
-  source                 = "../../modules/ecs"
-  project                = "devops-lab"
-  region                 = "ap-south-1"
-  vpc_id                 = module.network.vpc_id
-  public_subnet_ids      = module.network.public_subnet_ids
-  ecr_repository_url     = module.ecr.repository_url
-  target_group_arn       = module.alb.target_group_arn
-  alb_security_group_id  = module.alb.alb_security_group_id
+  source                = "../../modules/ecs"
+  project               = "devops-lab"
+  region                = "ap-south-1"
+  vpc_id                = module.network.vpc_id
+  public_subnet_ids     = module.network.public_subnet_ids
+  ecr_repository_url    = module.ecr.repository_url
+  target_group_arn      = module.alb.target_group_arn
+  alb_security_group_id = module.alb.alb_security_group_id
 }
 
 module "oidc" {

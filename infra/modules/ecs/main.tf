@@ -12,9 +12,9 @@ resource "aws_iam_role" "execution" {
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
     Statement = [{
-      Effect = "Allow"
+      Effect    = "Allow"
       Principal = { Service = "ecs-tasks.amazonaws.com" }
-      Action = "sts:AssumeRole"
+      Action    = "sts:AssumeRole"
     }]
   })
 }
@@ -100,8 +100,8 @@ resource "aws_ecs_service" "app" {
 
   load_balancer {
     target_group_arn = var.target_group_arn
-    container_name    = "${var.project}-container"
-    container_port    = 8080
+    container_name   = "${var.project}-container"
+    container_port   = 8080
   }
 
   depends_on = [aws_iam_role_policy_attachment.execution]
